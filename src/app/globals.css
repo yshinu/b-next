@@ -1,0 +1,256 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', ui-sans-serif,
+    system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', ui-serif,
+    Georgia, Cambria, 'Times New Roman', Times, serif;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 6px);
+  --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', serif;
+  --radius: 0.375rem;
+  --tracking-tighter: calc(var(--tracking-normal) - 0.03em);
+  --tracking-tight: calc(var(--tracking-normal) - 0.015em);
+  --tracking-wide: calc(var(--tracking-normal) + 0.02em);
+  --tracking-wider: calc(var(--tracking-normal) + 0.04em);
+  --tracking-widest: calc(var(--tracking-normal) + 0.08em);
+  --tracking-normal: var(--tracking-normal);
+  --shadow-2xl: var(--shadow-2xl);
+  --shadow-xl: var(--shadow-xl);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-md: var(--shadow-md);
+  --shadow: var(--shadow);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-xs: var(--shadow-xs);
+  --shadow-2xs: var(--shadow-2xs);
+  --spacing: var(--spacing);
+  --letter-spacing: var(--letter-spacing);
+  --shadow-offset-y: var(--shadow-offset-y);
+  --shadow-offset-x: var(--shadow-offset-x);
+  --shadow-spread: var(--shadow-spread);
+  --shadow-blur: var(--shadow-blur);
+  --shadow-opacity: var(--shadow-opacity);
+  --color-shadow-color: var(--shadow-color);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular,
+    Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+}
+
+:root {
+  /* 传统圆角 - 更加柔和 */
+  --radius: 0.375rem;
+
+  /* 亮色主题 - 宣纸白与墨色 */
+  --background: oklch(0.99 0.002 85); /* 宣纸白 */
+  --foreground: oklch(0.25 0.005 90); /* 深墨色 */
+  --card: oklch(0.995 0.001 85); /* 纯白卡片 */
+  --card-foreground: oklch(0.2 0.004 90); /* 浓墨 */
+  --popover: oklch(1 0 0); /* 纯白 */
+  --popover-foreground: oklch(0.25 0.005 90);
+
+  /* 主色调 - 朱砂红 */
+  --primary: oklch(0.55 0.22 25); /* 中国红/朱砂红 */
+  --primary-foreground: oklch(1 0 0);
+
+  /* 次要色调 - 青瓷色 */
+  --secondary: oklch(0.95 0.01 220); /* 淡青瓷 */
+  --secondary-foreground: oklch(0.45 0.02 220);
+
+  /* 静默色调 - 浅墨灰 */
+  --muted: oklch(0.97 0.005 80); /* 淡宣纸色 */
+  --muted-foreground: oklch(0.6 0.015 90); /* 中性墨灰 */
+
+  /* 强调色 - 琥珀金 */
+  --accent: oklch(0.96 0.02 70); /* 淡琥珀 */
+  --accent-foreground: oklch(0.4 0.15 50); /* 深琥珀 */
+
+  /* 警告色 - 朱红 */
+  --destructive: oklch(0.58 0.2 28); /* 朱红 */
+  --destructive-foreground: oklch(1 0 0);
+
+  /* 边框和输入 */
+  --border: oklch(0.92 0.008 85); /* 淡墨边框 */
+  --input: oklch(0.975 0.004 80); /* 输入框背景 */
+  --ring: oklch(0.55 0.22 25); /* 焦点环 - 朱砂红 */
+
+  /* 图表色彩 - 传统五色 */
+  --chart-1: oklch(0.55 0.22 25); /* 朱砂红 */
+  --chart-2: oklch(0.45 0.18 240); /* 青花蓝 */
+  --chart-3: oklch(0.55 0.16 150); /* 竹叶绿 */
+  --chart-4: oklch(0.65 0.15 60); /* 琥珀金 */
+  --chart-5: oklch(0.35 0.12 30); /* 紫檀棕 */
+
+  /* 侧边栏 */
+  --sidebar: oklch(0.98 0.004 80); /* 淡宣纸 */
+  --sidebar-foreground: oklch(0.4 0.01 90);
+  --sidebar-primary: oklch(0.55 0.22 25);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.965 0.006 85);
+  --sidebar-accent-foreground: oklch(0.35 0.008 90);
+  --sidebar-border: oklch(0.92 0.008 85);
+  --sidebar-ring: oklch(0.55 0.22 25);
+
+  /* 字体设置 - 优先中文字体 */
+  --font-sans: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', ui-sans-serif,
+    system-ui, sans-serif;
+  --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', ui-serif,
+    Georgia, serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+
+  /* 阴影设置 - 更加柔和 */
+  --shadow-color: oklch(0 0 0);
+  --shadow-opacity: 0.06;
+  --shadow-blur: 4px;
+  --shadow-spread: 0px;
+  --shadow-offset-x: 0;
+  --shadow-offset-y: 2px;
+  --letter-spacing: 0.01em;
+  --spacing: 0.25rem;
+
+  /* 传统阴影效果 */
+  --shadow-2xs: 0 1px 2px 0px oklch(0 0 0 / 0.03);
+  --shadow-xs: 0 1px 3px 0px oklch(0 0 0 / 0.06);
+  --shadow-sm: 0 2px 4px 0px oklch(0 0 0 / 0.06),
+    0 1px 2px -1px oklch(0 0 0 / 0.03);
+  --shadow: 0 3px 6px 0px oklch(0 0 0 / 0.06),
+    0 2px 4px -1px oklch(0 0 0 / 0.03);
+  --shadow-md: 0 4px 8px 0px oklch(0 0 0 / 0.08),
+    0 2px 4px -1px oklch(0 0 0 / 0.03);
+  --shadow-lg: 0 6px 12px 0px oklch(0 0 0 / 0.08),
+    0 4px 6px -1px oklch(0 0 0 / 0.03);
+  --shadow-xl: 0 8px 16px 0px oklch(0 0 0 / 0.1),
+    0 6px 8px -1px oklch(0 0 0 / 0.06);
+  --shadow-2xl: 0 12px 24px 0px oklch(0 0 0 / 0.12);
+
+  --tracking-normal: 0.01em;
+}
+
+.dark {
+  /* 暗色主题 - 墨色与宣纸 */
+  --background: oklch(0.15 0.01 90); /* 深墨色 */
+  --foreground: oklch(0.94 0.02 80); /* 宣纸白 */
+  --card: oklch(0.2 0.008 90); /* 深灰卡片 */
+  --card-foreground: oklch(0.94 0.02 80);
+  --popover: oklch(0.22 0.008 90);
+  --popover-foreground: oklch(0.92 0.018 80);
+
+  /* 主色调 - 胭脂红 */
+  --primary: oklch(0.65 0.2 15); /* 胭脂红 */
+  --primary-foreground: oklch(1 0 0);
+
+  /* 次要色调 - 青瓷蓝 */
+  --secondary: oklch(0.3 0.02 220); /* 深青瓷 */
+  --secondary-foreground: oklch(0.8 0.015 220);
+
+  /* 静默色调 - 深墨灰 */
+  --muted: oklch(0.22 0.01 90); /* 深墨 */
+  --muted-foreground: oklch(0.65 0.012 90); /* 浅墨灰 */
+
+  /* 强调色 - 金黄 */
+  --accent: oklch(0.28 0.012 90); /* 深琥珀 */
+  --accent-foreground: oklch(0.75 0.18 60); /* 明金黄 */
+
+  /* 警告色 */
+  --destructive: oklch(0.62 0.21 28);
+  --destructive-foreground: oklch(1 0 0);
+
+  /* 边框和输入 */
+  --border: oklch(0.32 0.012 90); /* 深边框 */
+  --input: oklch(0.25 0.01 90); /* 深输入框 */
+  --ring: oklch(0.65 0.2 15); /* 焦点环 - 胭脂红 */
+
+  /* 图表色彩 - 夜色传统色 */
+  --chart-1: oklch(0.65 0.2 15); /* 胭脂红 */
+  --chart-2: oklch(0.6 0.15 240); /* 月光蓝 */
+  --chart-3: oklch(0.65 0.14 150); /* 翡翠绿 */
+  --chart-4: oklch(0.75 0.18 60); /* 金黄 */
+  --chart-5: oklch(0.7 0.2 330); /* 桃花粉 */
+
+  /* 侧边栏 */
+  --sidebar: oklch(0.18 0.008 90);
+  --sidebar-foreground: oklch(0.85 0.015 80);
+  --sidebar-primary: oklch(0.65 0.2 15);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.3 0.02 220);
+  --sidebar-accent-foreground: oklch(0.9 0.01 80);
+  --sidebar-border: oklch(0.32 0.012 90);
+  --sidebar-ring: oklch(0.65 0.2 15);
+
+  /* 字体保持一致 */
+  --font-sans: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', ui-sans-serif,
+    system-ui, sans-serif;
+  --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', ui-serif,
+    Georgia, serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+
+  /* 暗色阴影 */
+  --shadow-color: oklch(0 0 0);
+  --shadow-opacity: 0.3;
+  --shadow-blur: 6px;
+  --shadow-spread: 0px;
+  --shadow-offset-x: 0;
+  --shadow-offset-y: 2px;
+  --letter-spacing: 0.01em;
+  --spacing: 0.25rem;
+
+  /* 深色阴影效果 */
+  --shadow-2xs: 0 1px 2px 0px oklch(0 0 0 / 0.2);
+  --shadow-xs: 0 1px 3px 0px oklch(0 0 0 / 0.3);
+  --shadow-sm: 0 2px 4px 0px oklch(0 0 0 / 0.3),
+    0 1px 2px -1px oklch(0 0 0 / 0.2);
+  --shadow: 0 3px 6px 0px oklch(0 0 0 / 0.3), 0 2px 4px -1px oklch(0 0 0 / 0.2);
+  --shadow-md: 0 4px 8px 0px oklch(0 0 0 / 0.4),
+    0 2px 4px -1px oklch(0 0 0 / 0.2);
+  --shadow-lg: 0 6px 12px 0px oklch(0 0 0 / 0.4),
+    0 4px 6px -1px oklch(0 0 0 / 0.2);
+  --shadow-xl: 0 8px 16px 0px oklch(0 0 0 / 0.5),
+    0 6px 8px -1px oklch(0 0 0 / 0.3);
+  --shadow-2xl: 0 12px 24px 0px oklch(0 0 0 / 0.6);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    letter-spacing: var(--tracking-normal);
+  }
+}
