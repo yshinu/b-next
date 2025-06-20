@@ -1,0 +1,137 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+// Enums 保持不变
+enum PostStatus {
+  DRAFT
+  PUBLISHED
+  SCHEDULED
+}
+
+enum PostVisibility {
+  PUBLIC
+  PASSWORD
+}
+
+enum CommentStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  SPAM
+}
+
+// Post 模型，已更新命名映射
+model Post {
+  viewCount    Int            @default(0) @map("view_count")
+  likeCount    Int            @default(0) @map("like_count")
+
+  id           String         @id @default(cuid())
+  title        String
+  slug         String         @unique
+  content      String
+  excerpt      String?
+  coverImage   String?        @map("cover_image")
+  status       PostStatus     @default(DRAFT)
+  visibility   PostVisibility @default(PUBLIC)
+  password     String?
+  publishedAt  DateTime?      @map("published_at")
+
+  createdAt    DateTime       @default(now()) @map("created_at")
+  updatedAt    DateTime       @updatedAt @map("updated_at")
+
+  comments     Comment[]
+  likes        PostLike[] // 新增关系：一篇文章可以有多个点赞记录
+  categories   Category[]
+
+
+  @@map("posts")
+}
+// Comment 模型，已更新命名映射
+model Comment {
+  id          String   @id @default(cuid())
+  content     String
+  
+  authorName  String   @map("author_name")
+  authorEmail String   @map("author_email")
+
+  ipAddress   String?  @map("ip_address")
+  userAgent   String?  @map("user_agent")
+
+  status      CommentStatus @default(PENDING)
+
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  // 关系字段也需要映射
+  postId      String   @map("post_id")
+  post        Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  parentId    String?  @map("parent_id")
+  parent      Comment? @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies     Comment[] @relation("CommentReplies")
+
+  @@index([postId])
+  @@index([parentId])
+  
+  // 将模型映射到数据库的 "comments" 表
+  @@map("comments")
+}
+model PostLike {
+  id          String   @id @default(cuid())
+  ipAddress   String   @map("ip_address")
+  userAgent   String   @map("user_agent")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  postId      String   @map("post_id")
+  post        Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, ipAddress], name: "unique_like_per_ip") // 给约束起个名字
+  @@map("post_likes")
+}
+model Category {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  slug        String   @unique
+  description String?
+
+  // 关系：一个分类可以有多篇文章
+  posts       Post[]
+
+  @@map("categories")
+}
+// 新增：网站及站长配置信息模型 (设计为只有一行数据)
+model SiteProfile {
+  id              String   @id @default(cuid())
+
+  // 网站信息
+  siteTitle       String   @map("site_title")
+  siteSubtitle    String?  @map("site_subtitle")
+  siteSlogan      String?  @map("site_slogan")
+  logoUrl         String?  @map("logo_url")
+  
+  // 站长信息
+  ownerName       String?  @map("owner_name")
+  ownerAvatarUrl  String?  @map("owner_avatar_url")
+  ownerSignature  String?  @map("owner_signature")
+  ownerTags       String[] @default([]) @map("owner_tags")
+
+  // 关于我
+  aboutMeContent  String?  @map("about_me_content")
+
+  // 统计
+  totalVisits     BigInt   @default(0) @map("total_visits")
+
+  @@map("site_profiles")
+}

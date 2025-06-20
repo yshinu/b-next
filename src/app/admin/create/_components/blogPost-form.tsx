@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { ControllerRenderProps, useForm } from 'react-hook-form';
-import * as z from 'zod';
-import { format, setHours, setMinutes, setSeconds } from 'date-fns';
-import { cn } from '@/lib/utils'; // shadcn-ui 默认的工具函数
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ControllerRenderProps, useForm } from "react-hook-form";
+import * as z from "zod";
+import { format, setHours, setMinutes, setSeconds } from "date-fns";
+import { cn } from "@/lib/utils"; // shadcn-ui 默认的工具函数
 
 // 引入 shadcn/ui 组件
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -16,28 +16,28 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+} from "@/components/ui/select";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
-import { Calendar } from '@/components/ui/calendar';
-import { CalendarIcon } from 'lucide-react';
-import { postFormSchema } from '../schema';
-import { zhCN } from 'date-fns/locale';
-import { useState } from 'react';
-import useContentStore from '../contentStore';
+} from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { CalendarIcon } from "lucide-react";
+import { postFormSchema } from "../schema";
+import { zhCN } from "date-fns/locale";
+import { useState } from "react";
+import useContentStore from "../contentStore";
 
 export function BlogPostForm() {
   const { content } = useContentStore();
@@ -45,27 +45,27 @@ export function BlogPostForm() {
   const form = useForm<z.infer<typeof postFormSchema>>({
     resolver: zodResolver(postFormSchema),
     defaultValues: {
-      title: '',
-      slug: '',
-      excerpt: '',
-      cover_image: '',
-      status: 'DRAFT',
-      visibility: 'PUBLIC',
-      password: '',
-      published_at: new Date(),
+      title: "",
+      slug: "",
+      excerpt: "",
+      coverImage: "",
+      status: "DRAFT",
+      visibility: "PUBLIC",
+      password: "",
+      publishedAt: undefined,
     },
   });
 
   // 监听 "visibility" 字段的值
-  const visibility = form.watch('visibility');
-
+  const visibility = form.watch("visibility");
+const status = form.watch('status');
   // 2. 定义提交处理函数.
   function onSubmit(values: z.infer<typeof postFormSchema>) {
     // 在这里处理表单提交逻辑
     // 例如: 发送数据到你的 API
-    console.log('Form submitted with values:', values);
-    console.log('Content:', {
-      content
+    console.log("Form submitted with values:", values);
+    console.log("Content:", {
+      content,
     });
   }
 
@@ -127,7 +127,7 @@ export function BlogPostForm() {
         {/* 封面图片 */}
         <FormField
           control={form.control}
-          name="cover_image"
+          name="coverImage"
           render={({ field }) => (
             <FormItem>
               <FormLabel>封面图片 (Cover Image)</FormLabel>
@@ -155,6 +155,10 @@ export function BlogPostForm() {
                 <SelectContent>
                   <SelectItem value="DRAFT">草稿 (Draft)</SelectItem>
                   <SelectItem value="PUBLISHED">已发布 (Published)</SelectItem>
+                  {/* 3. 新增 "预定发布" 选项 */}
+                  <SelectItem value="SCHEDULED">
+                    预定发布 (Scheduled)
+                  </SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
@@ -197,7 +201,7 @@ export function BlogPostForm() {
         />
 
         {/* 密码 (条件渲染) */}
-        {visibility === 'PASSWORD' && (
+        {visibility === "PASSWORD" && (
           <FormField
             control={form.control}
             name="password"
@@ -218,21 +222,21 @@ export function BlogPostForm() {
         )}
 
         {/* 发布时间 */}
-       <FormField
-          control={form.control}
-          name="published_at"
-          render={({ field }) => (
-            // FormItem 将管理标签和错误消息
-            <FormItem className="flex flex-col">
-              {/* 这里不再需要独立的 FormLabel，因为它被包含在了 DateTimePicker 内部 */}
-              <FormLabel className="mb-2">发布时间 (Published At)</FormLabel>
-              <FormControl>
-                <DateTimePicker field={field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        {status === "SCHEDULED" && (
+          <FormField
+            control={form.control}
+            name="publishedAt"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel className="mb-2">发布时间 (Published At)</FormLabel>
+                <FormControl>
+                  <DateTimePicker field={field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        )}
 
         <Button type="submit">提交</Button>
       </form>
@@ -240,7 +244,7 @@ export function BlogPostForm() {
   );
 }
 interface DateTimePickerProps {
-  field: ControllerRenderProps<z.infer<typeof postFormSchema>, 'published_at'>;
+  field: ControllerRenderProps<z.infer<typeof postFormSchema>, "publishedAt">;
 }
 
 const DateTimePicker: React.FC<DateTimePickerProps> = ({ field }) => {
@@ -252,7 +256,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({ field }) => {
     const time = e.target.value;
     if (!time || !dateValue) return;
 
-    const [hours, minutes] = time.split(':').map(Number);
+    const [hours, minutes] = time.split(":").map(Number);
     let newDate = setHours(dateValue, hours);
     newDate = setMinutes(newDate, minutes);
     // 可选：将秒设置为0
@@ -264,7 +268,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({ field }) => {
   // 当日历选择日期时调用
   const handleDateChange = (selectedDate: Date | undefined) => {
     if (!selectedDate) return;
-    
+
     // 保留当前的时间，只更新日期部分
     const currentHours = dateValue?.getHours() ?? 0;
     const currentMinutes = dateValue?.getMinutes() ?? 0;
@@ -285,15 +289,15 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({ field }) => {
         <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
           <PopoverTrigger asChild>
             <Button
-              variant={'outline'}
+              variant={"outline"}
               className={cn(
-                'w-[240px] justify-start text-left font-normal',
-                !dateValue && 'text-muted-foreground'
+                "w-[240px] justify-start text-left font-normal",
+                !dateValue && "text-muted-foreground"
               )}
             >
               <CalendarIcon className="mr-2 h-4 w-4" />
               {dateValue ? (
-                format(dateValue, 'PPP', { locale: zhCN })
+                format(dateValue, "PPP", { locale: zhCN })
               ) : (
                 <span>选择一个日期</span>
               )}
@@ -317,7 +321,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({ field }) => {
           id="time-picker"
           type="time"
           step="60" // step="60" 表示只接受分钟输入
-          value={dateValue ? format(dateValue, 'HH:mm') : ''}
+          value={dateValue ? format(dateValue, "HH:mm") : ""}
           onChange={handleTimeChange}
           className="w-24"
           disabled={!dateValue} // 如果没有先选择日期，则禁用时间选择
