@@ -15,7 +15,16 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.md-editor-catalog-link span:hover {
+   color: var(--primary);
+}
 
+.md-editor-catalog-active>span{
+  color: var(--primary);
+}
+.md-editor-catalog-indicator{
+  background: var(--primary);
+}
 /* --- 标题系列 (优化) --- */
 .hqbw-theme h1 {
   font-size: 2.5rem;
