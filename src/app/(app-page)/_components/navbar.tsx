@@ -1,4 +1,5 @@
-import { Themetoggle } from "@/components/theme-toggle";
+
+import { ModeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, Menu } from "lucide-react";
@@ -16,11 +17,10 @@ function Navbar() {
           </div>
 
           <nav className="hidden md:flex items-center gap-6">
-            <a href="#" className="text-sm font-medium hover:text-primary transition-colors">首页</a>
-            <a href="#" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">分类</a>
-            <a href="#" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">归档</a>
+            <a href="/" className="text-sm font-medium hover:text-primary transition-colors">首页</a>
+            <a href="/categories" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">分类</a>
+            <a href="/archive" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">归档</a>
             <a href="#" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">关于</a>
-            <a href="#" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">书单</a>
           </nav>
 
           <div className="flex items-center gap-2">
@@ -34,7 +34,7 @@ function Navbar() {
             <Button variant="ghost" size="icon" className="md:hidden">
               <Menu className="h-5 w-5" />
             </Button>
-            <Themetoggle/>
+            <ModeToggle/>
           </div>
         </div>
       </header> );
