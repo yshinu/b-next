@@ -307,7 +307,6 @@ export default function Home() {
         </div>
       </main>
 
-      {/* 订阅区域 */}
       <Sub/>
 
     </div>

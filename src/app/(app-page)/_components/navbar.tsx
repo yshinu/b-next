@@ -20,7 +20,7 @@ function Navbar() {
             <a href="/" className="text-sm font-medium hover:text-primary transition-colors">首页</a>
             <a href="/categories" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">分类</a>
             <a href="/archive" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">归档</a>
-            <a href="#" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">关于</a>
+            <a href="/about" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">关于</a>
           </nav>
 
           <div className="flex items-center gap-2">
