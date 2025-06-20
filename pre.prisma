@@ -1,0 +1,93 @@
+enum CommentStatus {
+  PENDING   // 待审核
+  APPROVED  // 已批准
+  SPAM      // 垃圾评论
+}
+model Post {
+  id           BigInt    @id @default(autoincrement())
+  title        String
+  content      String?   @db.Text
+  slug         String    @unique
+  excerpt      String?
+  cover_image  String?   @map("cover_image")
+  status       String    // 建议之后可以改为 Enum 类型
+  visibility   String    // 建议之后可以改为 Enum 类型
+  password     String?
+  published_at DateTime? @map("published_at")
+  edit_at      DateTime? @map("edit_at")
+  
+  // --- 新增的字段 ---
+  /// 博客文章的阅读量
+  viewCount    Int       @default(0) @map("view_count")
+
+  comments     Comment[]
+
+  @@map("posts")
+}
+model Comment {
+  /// 评论的唯一ID，主键，自增。
+  /// @id 定义为主键，@default(autoincrement()) 设置为自增。
+  id        BigInt   @id @default(autoincrement())
+
+  /// 关联的文章ID。
+  /// 我们将通过下面的 `post` 字段建立与 Post 模型的关系。
+  postId    BigInt   @map("post_id")
+
+  /// 父评论ID，用于实现嵌套回复（盖楼）。
+  /// 字段类型后的 `?` 表示这是一个可选字段（可以为 NULL）。
+  /// 顶级评论此字段为 NULL。
+  parentId  BigInt?  @map("parent_id")
+
+  /// 评论者昵称。
+  /// @db.VarChar(50) 明确指定数据库中的列类型为 VARCHAR(50)。
+  nickname  String   @db.VarChar(50)
+
+  /// 评论者邮箱。
+  /// 关键的用户信息，但注意不要在前端公开显示。可用于 Gravatar 头像。
+  email     String   @db.VarChar(100)
+
+  /// 评论者个人网址（可选）。
+  website   String?  @db.VarChar(255)
+
+  /// 评论的具体内容。
+  /// @db.Text 对应数据库中的 TEXT 类型，适合存储长文本。
+  content   String   @db.Text
+
+  /// 评论者的IP地址（可选）。
+  /// 用于反垃圾和审计。
+  ipAddress String?  @map("ip_address") @db.VarChar(45)
+
+  /// 评论者使用的浏览器信息（可选）。
+  userAgent String?  @map("user_agent") @db.VarChar(255)
+
+  /// 评论状态。
+  /// 直接使用我们定义的 CommentStatus 枚举，默认值为 PENDING (待审核)。
+  status    CommentStatus @default(PENDING)
+
+  /// 评论创建时间。
+  /// @default(now()) 会在创建记录时自动设置为当前时间。
+  createdAt DateTime @default(now()) @map("created_at")
+
+  /// 评论最后更新时间。
+  /// @updatedAt 会在每次记录更新时自动更新为当前时间。
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // --- 关系定义 (Relations) ---
+
+  /// 定义与 Post 模型的多对一关系。
+  /// 一条评论只属于一篇文章。
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  /// 定义自引用关系，用于实现评论的嵌套。
+  /// `parent` 字段代表这条评论的父评论。
+  parent    Comment? @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  /// `replies` 字段代表这条评论下的所有子评论（回复）。
+  replies   Comment[] @relation("CommentReplies")
+
+  /// 在数据库层面为 `comments` 表添加索引，以优化查询性能。
+  @@index([postId])
+  @@index([parentId])
+  /// 将模型映射到数据库中的 `comments` 表。
+  @@map("comments")
+}
