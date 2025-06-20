@@ -37,8 +37,10 @@ import { CalendarIcon } from 'lucide-react';
 import { postFormSchema } from '../schema';
 import { zhCN } from 'date-fns/locale';
 import { useState } from 'react';
+import useContentStore from '../contentStore';
 
 export function BlogPostForm() {
+  const { content } = useContentStore();
   // 1. 定义你的表单.
   const form = useForm<z.infer<typeof postFormSchema>>({
     resolver: zodResolver(postFormSchema),
@@ -62,7 +64,9 @@ export function BlogPostForm() {
     // 在这里处理表单提交逻辑
     // 例如: 发送数据到你的 API
     console.log('Form submitted with values:', values);
-    alert(JSON.stringify(values, null, 2));
+    console.log('Content:', {
+      content
+    });
   }
 
   return (

@@ -1,11 +1,10 @@
+'use client'; // Required for using hooks like useTheme
+
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
 import {
   ArrowLeft,
-  CalendarDays,
-  Clock,
   Github,
   Heart,
   Mail,
@@ -14,8 +13,16 @@ import {
   Bookmark,
   Share2,
 } from 'lucide-react';
+import { MdPreview, MdCatalog } from 'md-editor-rt';
+import 'md-editor-rt/lib/preview.css';
+import { useTheme } from 'next-themes';
+import "@/app/hqbw.css"; // Assuming you have this css file for the hqbw theme
 
 export default function PostPage() {
+  const { theme } = useTheme();
+
+  const text = '## 中国封建王朝的兴衰更迭：一部宏大的历史画卷\n\n### 引言\n\n中国，一个拥有数千年连绵不绝文明史的古国，其封建社会的历史跨度之长、王朝更迭之频繁，在世界历史上绝无仅有。从公元前221年秦始-皇统一六国，建立第一个中央集权的封建王朝，到1912年清帝逊位，封建帝制终结，这长达两千多年的岁月里，数十个王朝在华夏大地上演了一幕幕兴起、鼎盛、衰落、覆灭的宏大历史剧。这些王朝的更迭，并非简单的重复，而是在螺旋式上升中推动着中国社会、经济、文化的不断演进。本篇文档将深入探讨中国封建王朝兴衰的内在逻辑、周期性规律以及其对后世的深远影响，并通过数据、图表等形式，力求全面、客观地展现这一波澜壮阔的历史进程。\n\n### 第一章：王朝更迭的周期性规律——“其兴也勃焉，其亡也忽焉”\n\n中国封建王朝的更迭呈现出明显的周期性特征，后世史家将其总结为“王朝周期律”。一个王朝的生命周期，通常会经历以下几个阶段：\n\n**王朝周期流程图**\n\n```mermaid\ngraph TD\n    A[王朝末年，天下大乱] --> B{新王朝建立};\n    B --> C[休养生息，轻徭薄赋];\n    C --> D[社会稳定，经济发展];\n    D --> E{鼎盛时期（盛世）};\n    E --> F[社会矛盾加剧，土地兼并严重];\n    F --> G[政治腐败，宦官外戚专权];\n    G --> H[天灾人祸，农民起义];\n    H --> I[地方割据，群雄并起];\n    I --> A;\n```\n\n这个流程图清晰地揭示了王朝兴衰的内在逻辑。新王朝的建立者往往是雄才大略的君主，他们吸取前朝灭亡的教训，励精图治，采取一系列恢复社会生产的措施。随着政权的巩固和发展，王朝进入鼎盛时期，国力强盛，四方来朝。然而，繁荣的表象下，危机也在悄然滋生。统治阶级的腐化、土地兼并的加剧、社会阶层的固化，都为王朝的衰败埋下了伏笔。最终，一场大规模的农民起义或内部的军事政变，成为压垮骆驼的最后一根稻草，旧的王朝覆灭，新的王朝在废墟上建立，开始又一轮的循环。\n\n### 第二章：主要封建王朝的兴衰历程与数据透视\n\n以下将选取几个具有代表性的重要王朝，对其兴衰历程进行详细的阐述，并结合关键数据进行分析。\n\n#### **中国主要封建王朝甘特图**\n\n```mermaid\ngantt\n    title 中国主要封建王朝时间轴\n    dateFormat  YYYY\n    axisFormat %Y\n\n    section 秦汉时期\n    秦朝          : crit, 221BCE, 207BCE\n    西汉          : 202BCE, 9CE\n    新朝          : 9CE, 23CE\n    东汉          : 25, 220\n\n    section 魏晋南北朝\n    三国          : 220, 280\n    西晋          : 266, 316\n    东晋          : 317, 420\n    南北朝        : 420, 589\n\n    section 隋唐宋元\n    隋朝          : 581, 618\n    唐朝          : 618, 907\n    五代十国      : 907, 960\n    北宋          : 960, 1127\n    南宋          : 1127, 1279\n    辽朝          : 916, 1125\n    金朝          : 1115, 1234\n    元朝          : 1271, 1368\n\n    section 明清时期\n    明朝          : 1368, 1644\n    清朝          : 1644, 1912\n```\n\n#### 2.1 大一统帝国的开创者——秦朝（公元前221年 - 公元前207年）\n\n  * **崛起：** 秦国地处关中，民风强悍，法家思想深入人心。自商鞅变法后，国力日强，最终在秦王嬴政的带领下，横扫六合，完成了中国历史上第一次大一统。秦始皇废分封，立郡县，书同文，车同轨，统一度量衡，对中国历史产生了深远的影响。\n  * **覆灭：** 秦朝的统治是建立在严刑酷法和繁重徭役之上的。大规模的工程建设（如长城、阿房宫、骊山陵）耗尽了民力，焚书坑儒等文化高压政策激化了社会矛盾。秦始皇死后，赵高、李斯等人发动沙丘之变，秦二世胡亥昏庸无能，最终导致陈胜、吴广起义爆发，天下响应，仅仅15年后，强秦便土崩瓦解。\n\n| **秦朝关键数据** | **数值/描述** |\n| :--- | :--- |\n| **存在时间** | 15年 |\n| **开国皇帝** | 秦始皇嬴政 |\n| **末代皇帝** | 秦王子婴 |\n| **鼎盛时期人口** | 约2000万 - 3000万 |\n| **灭亡原因** | 暴政、徭役繁重、法律严苛、农民起义 |\n\n#### 2.2 “汉承秦制”与文景之治——汉朝（公元前202年 - 公元220年）\n\n  * **崛起与鼎盛：** 汉高祖刘邦吸取秦亡教训，采取“休养生息”的国策，轻徭薄赋。文景之治时期，社会经济得到极大恢复和发展，府库充盈，人民富足，史称“文景之治”。汉武帝刘彻时期，汉朝进入鼎盛。他北击匈奴，南平百越，西南通夷，设置西域都护府，奠定了中华版图的基础。同时，他“罢黜百家，独尊儒术”，使儒家思想成为此后两千年中国封建社会的正统思想。\n  * **衰落与覆灭：** 西汉末年，外戚王莽篡权，建立新朝。新朝改革失败，引发绿林、赤眉起义。东汉建立后，虽然出现了“光武中兴”，但中期以后，外戚与宦官交替专权，政治日益腐败。土地兼并问题愈发严重，大量农民流离失所。最终，黄巾起义爆发，敲响了东汉的丧钟，随后陷入了长达数十年的军阀混战。\n\n| **汉朝关键数据** | **西汉** | **东汉** |\n| :--- | :--- | :--- |\n| **存在时间** | 211年 | 195年 |\n| **开国皇帝** | 汉高祖刘邦 | 汉光武帝刘秀 |\n| **鼎盛时期人口** | 约6000万（西汉末年） | 约5600万（东汉中期） |\n| **重要制度** | 察举制、刺史制度 | / |\n| **灭亡原因** | 外戚专权、土地兼并、农民起义 | 宦官外戚专权、土地兼并、黄巾起义 |\n\n#### 2.3 盛世华章与安史之乱——唐朝（618年 - 907年）\n\n  * **崛起与鼎盛：** 隋末农民起义后，李渊、李世民父子建立了唐朝。唐太宗李世民励精图治，虚心纳谏，开创了“贞观之治”。其后，唐高宗、武则天、唐玄宗前期，唐朝国力达到顶峰，史称“开元盛世”。此时的唐朝，政治清明，经济繁荣，文化昌盛，对外交往频繁，长安成为世界性的都会。\n  * **转折与覆灭：** “安史之乱”是唐朝由盛转衰的转折点。长达八年的战乱，极大地削弱了唐朝的中央集权，造成了藩镇割据的局面。此后，唐朝虽然又延续了一百五十余年，但已不复盛唐气象。晚唐时期，宦官专权、朋党之争、农民起义（如黄巢起义）接连不断，最终被藩镇将领朱温所篡，五代十国的大分裂时期开始。\n\n| **唐朝关键数据** | **数值/描述** |\n| :--- | :--- |\n| **存在时间** | 289年 |\n| **开国皇帝** | 唐高祖李渊 |\n| **鼎盛时期** | 贞观之治、开元盛世 |\n| **鼎盛时期人口** | 约8000万 - 9000万 |\n| **转折事件** | 安史之乱 |\n| **灭亡原因** | 藩镇割据、宦官专权、朋党之争、农民起义 |\n\n#### 2.4 经济文化的高峰与军事的羸弱——宋朝（960年 - 1279年）\n\n  * **崛起与特点：** 宋太祖赵匡胤通过“陈桥兵变”黄袍加身，结束了五代十国的混乱局面。宋朝采取“重文抑武”的国策，一方面加强了中央集权，避免了唐末的藩镇割据悲剧重演；另一方面，也导致了军队战斗力低下，“冗兵、冗官、冗费”问题严重。然而，宋代的经济和文化却达到了空前的高度，商业繁荣，城市兴起，科技发达（活字印刷术、指南针、火药三大发明在此时得到广泛应用），市民文化生活丰富多彩。\n  * **衰落与覆灭：** 宋朝自始至终面临着北方少数民族政权（辽、金、西夏）的巨大军事压力。北宋末年，政治腐败，最终被金朝所灭，史称“靖康之耻”。南宋偏安江南，虽有岳飞等名将力图恢复，但最终在蒙古铁骑的冲击下，于1279年崖山海战后灭亡。\n\n| **宋朝关键数据** | **北宋** | **南宋** |\n| :--- | :--- | :--- |\n| **存在时间** | 167年 | 152年 |\n| **开国皇帝** | 宋太祖赵匡胤 | 宋高宗赵构 |\n| **鼎盛时期人口** | 约1亿（北宋末年） | / |\n| **科技成就** | 活字印刷术、指南针、火药的广泛应用 | / |\n| **灭亡原因** | 军事实力弱、外族入侵、政治腐败 | 外族入侵 |\n\n#### 2.5 马上得天下，不能马上治天下——元朝（1271年 - 1368年）\n\n  * **崛起：** 蒙古部落在成吉思汗的带领下统一，并开始了大规模的对外征服。其孙忽必烈建立元朝，定都大都（今北京），最终灭亡南宋，统一中国。元朝的版图空前辽阔，建立了有效的驿站制度，促进了中外交通和文化交流。\n  * **覆灭：** 元朝的统治者将各族人民分为四等（蒙古人、色目人、汉人、南人），实行残酷的民族压迫和阶级剥削政策，激起了汉族人民的强烈反抗。此外，元朝统治者对汉族文化不够重视，对农业经济的破坏也十分严重。元末，政治腐败，天灾频发，最终爆发了以红巾军为主力的农民大起义，朱元璋在群雄中脱颖而出，建立了明朝，元朝统治者退回漠北。\n\n| **元朝关键数据** | **数值/描述** |\n| :--- | :--- |\n| **存在时间** | 97年 |\n| **开国皇帝** | 元世祖忽必烈 |\n| **统治特点** | 民族等级制度、行省制度 |\n| **鼎盛时期人口** | 约6000万 - 8500万 |\n| **灭亡原因** | 民族压迫、阶级矛盾、农民起义 |\n\n#### 2.6 最后的汉人王朝——明朝（1368年 - 1644年）\n\n  * **崛起与鼎盛：** 明太祖朱元璋出身贫寒，深知吏治腐败之害，因此在位期间大力整顿吏治，废除丞相制度，加强皇权。明成祖朱棣时期，派遣郑和下西洋，宣扬国威，编纂《永乐大典》，国力达到鼎盛。明朝中后期，资本主义萌芽出现，手工业和商业得到进一步发展。\n  * **衰落与覆灭：** 明朝中后期，皇帝多怠于政事，宦官专权（如王振、刘瑾、魏忠贤）成为一大顽疾。土地兼并问题依然严重，导致大量流民出现。明末，天灾不断，政府财政枯竭，无力赈灾。最终，李自成领导的农民起义军攻破北京，崇祯皇帝自缢于煤山。与此同时，关外的满洲（后金）崛起，吴三桂引清兵入关，明朝覆灭。\n\n| **明朝关键数据** | **数值/描述** |\n| :--- | :--- |\n| **存在时间** | 276年 |\n| **开国皇帝** | 明太祖朱元璋 |\n| **重要事件** | 郑和下西洋、土木堡之变 |\n| **鼎盛时期人口** | 约1.5亿 - 2亿（明末） |\n| **灭亡原因** | 宦官专权、土地兼并、农民起义、外族入侵 |\n\n#### 2.7 最后的辉煌与落幕——清朝（1644年 - 1912年）\n\n  * **崛起与鼎盛：** 清朝由满族建立，入关后，逐步统一全国。康熙、雍正、乾隆三朝，长达一百三十余年，是中国封建社会后期的最后一个盛世，史称“康乾盛世”。这一时期，清朝平定了三藩之乱，收复台湾，击败准噶尔叛乱，加强了对西藏、新疆等边疆地区的管辖，奠定了现代中国的版图。\n  * **衰落与覆灭：** 乾隆后期，清朝开始由盛转衰。吏治腐败，人口急剧增长导致人地矛盾尖锐。更重要的是，清朝统治者实行“闭关锁国”政策，错过了工业革命的浪潮，导致中国与西方的差距迅速拉大。1840年鸦片战争爆发，中国开始沦为半殖民地半封建社会。此后，太平天国运动、洋务运动、戊戌变法、义和团运动等一系列内外冲击，都未能挽救清王朝的命运。最终，1911年辛亥革命爆发，次年，宣统皇帝溥仪下诏退位，中国两千多年的封建帝制宣告结束。\n\n| **清朝关键数据** | **数值/描述** |\n| :--- | :--- |\n| **存在时间** | 268年 |\n| **开国皇帝** | （入关后）顺治帝福临 |\n| **鼎盛时期** | 康乾盛世 |\n| **鼎盛时期人口** | 约4亿（清末） |\n| **转折事件** | 鸦片战争 |\n| **灭亡原因** | 闭关锁国、制度僵化、西方列强入侵、辛亥革命 |\n\n### 第三章：王朝兴衰的深层原因探析\n\n王朝的更迭，表面上看是战争与权力的游戏，但其背后，有着深刻的经济、政治、社会和文化原因。\n\n**王朝兴衰因素分析**\n\n| **领域** | **推动王朝兴起的积极因素** | **导致王朝覆灭的消极因素** |\n| :--- | :--- | :--- |\n| **经济** | \\<ul\\>\\<li\\>轻徭薄赋，休养生息\\</li\\>\\<li\\>兴修水利，推广农业技术\\</li\\>\\<li\\>商品经济发展，城市繁荣\\</li\\>\\<li\\>国家掌握盐铁等重要资源\\</li\\>\\</ul\\> | \\<ul\\>\\<li\\>土地兼并，贫富分化严重\\</li\\>\\<li\\>赋税沉重，徭役繁多\\</li\\>\\<li\\>自然灾害频发，政府救济不力\\</li\\>\\<li\\>货币体系混乱，通货膨胀\\</li\\>\\</ul\\> |\n| **政治** | \\<ul\\>\\<li\\>建立高效的中央集权制度\\</li\\>\\<li\\>选贤任能，吏治清明\\</li\\>\\<li\\>制定开明合理的法律\\</li\\>\\<li\\>强大的军事实力，巩固边防\\</li\\>\\</ul\\> | \\<ul\\>\\<li\\>皇权旁落（外戚、宦官、权臣专权）\\</li\\>\\<li\\>官僚机构臃肿，腐败滋生\\</li\\>\\<li\\>朋党之争，内耗严重\\</li\\>\\<li\\>地方割据势力强大\\</li\\>\\</ul\\> |\n| **社会** | \\<ul\\>\\<li\\>社会阶层流动性较强（如科举制）\\</li\\>\\<li\\>社会矛盾相对缓和\\</li\\>\\<li\\>人口稳定增长\\</li\\>\\<li\\>思想文化活跃开放\\</li\\>\\</ul\\> | \\<ul\\>\\<li\\>阶级矛盾尖锐，农民起义不断\\</li\\>\\<li\\>社会阶层固化，上升通道堵塞\\</li\\>\\<li\\>人口过度增长，人地矛盾突出\\</li\\>\\<li\\>民族矛盾激化\\</li\\>\\</ul\\> |\n| **外部** | \\<ul\\>\\<li\\>周边民族关系处理得当\\</li\\>\\<li\\>开放包容的对外政策\\</li\\>\\</ul\\> | \\<ul\\>\\<li\\>外族入侵，边防压力巨大\\</li\\>\\<li\\>闭关锁国，错失发展机遇（清朝尤为典型）\\</li\\>\\</ul\\> |\n\n从上表可以看出，土地问题是贯穿中国封建社会始终的核心问题。封建王朝的经济基础是小农经济，一旦土地高度集中于地主阶级手中，大量自耕农破产沦为佃农或流民，社会的稳定便无从谈起。而政治腐败，特别是最高统治集团的腐化，则是王朝衰亡的催化剂。当一个政权失去自我革新的能力，无法有效应对内外危机时，其覆灭也就只是时间问题。\n\n### 第四章：历史的回响与启示\n\n中国封建王朝的兴衰史，不仅仅是帝王将相的家谱，更是一部民族的奋斗史和血泪史。它留给后世的，是丰富的历史遗产和深刻的经验教训。\n\n1.  **“水能载舟，亦能覆舟”**：民心向背是决定一个政权存亡的根本因素。任何脱离人民群众、与民争利的政权，都无法长久。\n2.  **制度建设的极端重要性**：一个王朝能否长治久安，很大程度上取决于其制度设计是否合理、能否有效运行。无论是秦朝的郡县制、汉朝的察举制、隋唐的科举制，还是宋朝的“重文抑武”、明朝的内阁制，都对其朝代的命运产生了决定性的影响。\n3.  **居安思危，警惕盛世危机**：许多王朝的衰败，恰恰始于其鼎盛时期。歌舞升平的表象，容易掩盖深层次的社会矛盾。统治者必须时刻保持清醒的头脑，防微杜渐。\n4.  **开放与改革是发展的动力**：汉唐的强盛，得益于其开放包容的胸襟。而清朝的衰落，则与“闭关锁国”政策造成的固步自封有直接关系。在历史发展的关键节点，能否顺应潮流，锐意改革，是决定兴衰成败的关键。\n\n### 结语\n\n“青山依旧在，几度夕阳红。”中国封建王朝的兴衰更迭，如同一幅波澜壮阔的历史长卷，充满了悲壮与辉煌。它揭示了权力、制度与人性的复杂互动，也展现了中华民族在逆境中生生不息、愈挫愈勇的强大生命力。今天，当我们回望这段漫长而厚重的历史时，不仅是为了感叹王朝的更替，更是为了从中汲取智慧和力量，以史为鉴，开创未来。两千多年的封建史，最终汇入世界历史的洪流，其兴衰的内在逻辑和深刻教训，至今仍然发人深省，具有超越时空的现实意义。'
+
   return (
     <div className="bg-gradient-to-br from-background to-muted/20 min-h-screen">
       {/* 导航栏 */}
@@ -46,137 +53,18 @@ export default function PostPage() {
           {/* 文章内容 */}
           <div className="lg:col-span-2">
             <article className="bg-card/60 backdrop-blur-xl border border-border/50 rounded-xl shadow-sm p-6 mb-12">
-              {/* 文章元信息 */}
-              <div className="flex flex-wrap items-center text-muted-foreground text-sm mb-6 gap-4">
-                <span className="bg-primary text-secondary px-3 py-1 rounded-full font-medium">
-                  科技人文
-                </span>
-                <div className="flex items-center">
-                  <CalendarDays className="mr-1.5 h-4 w-4" />
-                  <span>2023年9月5日</span>
-                </div>
-                <div className="flex items-center">
-                  <Clock className="mr-1.5 h-4 w-4" />
-                  <span>12分钟阅读</span>
-                </div>
-              </div>
-
-              {/* 文章标题 */}
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 font-serif text-card-foreground">
-                数字时代的诗意栖居
-              </h1>
-
-              {/* 文章副标题 */}
-              <p className="text-xl text-muted-foreground mb-10 italic border-l-4 border-primary pl-4 py-2">
-                在算法统治的世界里，如何保持内心的诗意与人文关怀？探索技术与精神生活的平衡之道。
-              </p>
-
-              {/* 文章封面图 */}
-              <div className="rounded-xl overflow-hidden mb-10 aspect-video bg-gradient-to-r from-secondary/20 to-primary/20 flex items-center justify-center">
-                <div className="text-center p-8">
-                  <div className="text-5xl font-serif mb-4">数字时代 × 诗意栖居</div>
-                  <div className="text-muted-foreground">摄影：林思哲 / 2023年9月</div>
-                </div>
-              </div>
-
-              {/* 文章正文 */}
-              <div className="prose prose-lg max-w-none text-foreground">
-                <p className="mb-6 leading-relaxed">
-                  在信息爆炸的时代，我们被各种算法推荐的内容包围，从清晨醒来到夜晚入睡，数字设备几乎占据了我们清醒时的每一刻。这种无处不在的数字连接，在带来便利的同时，也悄然改变着我们的思考方式和情感体验。
-                </p>
-
-                <p className="mb-6 leading-relaxed">
-                  诗人里尔克曾写道："我生活在不断扩大的轨道上，它们覆盖万物之上。" 在数字时代，我们的轨道确实在不断扩大，但这种扩大是横向的而非纵向的——我们接触的信息越来越多，但深度却越来越浅。当算法不断推送符合我们偏好的内容时，我们的认知边界实际上在缩小而非扩大。
-                </p>
-
-                <h2 className="text-2xl font-bold font-serif mt-10 mb-6 text-card-foreground">被量化的情感体验</h2>
-
-                <p className="mb-6 leading-relaxed">
-                  社交媒体上的点赞、分享和评论数量，成为了我们衡量内容价值的标准。一首诗的价值不再取决于它的美学深度和情感共鸣，而是看它在15秒内能获得多少互动。当我们习惯于用数字量化一切时，那些无法被量化的微妙情感体验——如黄昏时的忧郁、雨后泥土的芬芳、深夜独处时的哲思——便逐渐从我们的生活中退场。
-                </p>
-
-                <blockquote className="border-l-4 border-primary pl-4 py-2 my-6 italic bg-muted/20 text-card-foreground">
-                  "技术本身并无善恶，但技术的应用方式却深刻影响着人类的精神生态。当我们将所有事物都转化为数据点时，我们也在将自己转化为数据点。"
-                  <footer className="mt-2 not-italic text-muted-foreground">—— 科技哲学家 陈明远</footer>
-                </blockquote>
-
-                <p className="mb-6 leading-relaxed">
-                  这种量化思维甚至延伸到了我们的情感关系中。约会应用根据算法匹配度推荐潜在伴侣，朋友关系通过社交媒体互动频率来评估亲密程度。当人际关系被简化为数据点时，那些在缓慢相处中自然产生的默契、在共同经历中培养的理解，这些无法被量化的珍贵品质，反而被边缘化了。
-                </p>
-
-                <div className="bg-gradient-to-r from-secondary/10 to-primary/10 p-6 rounded-xl my-8">
-                  <h3 className="font-bold text-lg mb-3 font-serif">诗意栖居的实践建议：</h3>
-                  <ul className="list-disc pl-5 space-y-2">
-                    <li>建立"数字斋戒"习惯：每周留出一天时间远离所有数字设备</li>
-                    <li>培养深度阅读能力：每天至少30分钟不受干扰的纸质书阅读</li>
-                    <li>恢复手工书写：用笔记录思考，体验文字与纸张的触感交流</li>
-                    <li>创造无目的时间：允许自己无所事事，让思绪自由漫游</li>
-                    <li>发展线下兴趣：参加实体社区活动，体验真实的人际互动</li>
-                  </ul>
-                </div>
-
-                <h2 className="text-2xl font-bold font-serif mt-10 mb-6 text-card-foreground">重建深度思考的能力</h2>
-
-                <p className="mb-6 leading-relaxed">
-                  数字时代的浅层信息消费模式正在重塑我们的大脑神经通路。研究发现，频繁的多任务处理和快速信息浏览会降低我们的专注力和深度思考能力。当我们习惯了在15秒短视频中获取信息，阅读长篇复杂文本就变得困难；当我们习惯了碎片化的社交媒体表达，构建复杂论证的能力也随之退化。
-                </p>
-
-                <p className="mb-6 leading-relaxed">
-                  要重建深度思考的能力，我们需要刻意创造"慢思考"的空间。这包括：
-                </p>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-                  <Card className="bg-background/50 backdrop-blur-sm border-border/30">
-                    <CardContent className="p-6">
-                      <h3 className="font-bold font-serif mb-3">沉思练习</h3>
-                      <p>每天留出10-15分钟静坐沉思，不追求结论，只是观察自己的思绪流动，培养对思维过程的元认知。</p>
-                    </CardContent>
-                  </Card>
-                  <Card className="bg-background/50 backdrop-blur-sm border-border/30">
-                    <CardContent className="p-6">
-                      <h3 className="font-bold font-serif mb-3">延时回应</h3>
-                      <p>在社交媒体上看到引发强烈情绪的内容时，强制自己等待至少30分钟再回应，让理性思考介入情感反应。</p>
-                    </CardContent>
-                  </Card>
-                </div>
-
-                <h2 className="text-2xl font-bold font-serif mt-10 mb-6 text-card-foreground">技术的人文转向</h2>
-
-                <p className="mb-6 leading-relaxed">
-                  面对数字时代的挑战，我们需要的不是拒绝技术，而是引导技术发展的人文转向。越来越多的科技从业者开始反思技术的本质目的，探索如何让技术服务于人的全面发展而非碎片化人的注意力。
-                </p>
-
-                <p className="mb-6 leading-relaxed">
-                  一些值得关注的趋势包括：
-                </p>
-
-                <ul className="list-decimal pl-5 space-y-3 mb-8">
-                  <li><strong>慢科技运动</strong>：设计鼓励专注而非分心的数字产品</li>
-                  <li><strong>人文科技教育</strong>：在STEM教育中融入哲学、伦理和美学课程</li>
-                  <li><strong>算法透明度</strong>：推动算法决策的透明度和可解释性</li>
-                  <li><strong>数字健康设计</strong>：在产品设计中内置使用时长提醒和休息提示</li>
-                </ul>
-
-                <p className="mb-6 leading-relaxed">
-                  真正的诗意栖居，不在于完全逃离数字世界，而在于培养一种自主性——能够自由选择何时连接、何时断开；能够区分哪些技术真正丰富我们的生活，哪些只是在消耗我们的注意力；能够在算法的包围中保持独立思考的能力。
-                </p>
-
-                <h2 className="text-2xl font-bold font-serif mt-10 mb-6 text-card-foreground">结语：在比特与灵魂之间</h2>
-
-                <p className="mb-6 leading-relaxed">
-                  数字时代带来的挑战，本质上是关于如何在一个高度技术化的环境中保持人性的完整。诗意栖居不是怀旧的浪漫幻想，而是一种必要的生存智慧——在比特洪流中守护灵魂的栖息地。
-                </p>
-
-                <p className="mb-6 leading-relaxed">
-                  当我们能够有意识地使用技术，而不是被技术所使用；当我们能在数字连接中保持内心的独立空间；当我们能在数据化的世界中继续珍视那些无法被量化的体验——那时，我们才真正找到了数字时代的诗意栖居之道。
-                </p>
-              </div>
+              <MdPreview
+                id="post-content"
+                theme={theme as 'dark' | 'light'}
+                value={text}
+                previewTheme="hqbw"
+              />
 
               {/* 文章标签 */}
               <div className="flex flex-wrap gap-2 mt-10 mb-8">
                 {['数字人文', '科技哲学', '注意力经济', '慢生活', '精神生态'].map(tag => (
-                  <span 
-                    key={tag} 
+                  <span
+                    key={tag}
                     className="px-3 py-1 text-sm bg-muted rounded-full text-muted-foreground"
                   >
                     #{tag}
@@ -244,7 +132,7 @@ export default function PostPage() {
                       </div>
                     </div>
                   </div>
-                  
+
                   {/* 评论2 */}
                   <div className="flex gap-4">
                     <Avatar className="w-12 h-12 border-2 border-background">
@@ -269,13 +157,13 @@ export default function PostPage() {
                       </div>
                     </div>
                   </div>
-                  
+
                   {/* 添加评论框 */}
                   <div className="pt-6 mt-8 border-t border-border/30">
                     <h4 className="font-bold mb-4">发表评论</h4>
                     <div className="space-y-4">
-                      <textarea 
-                        className="w-full min-h-[120px] p-4 bg-muted/20 border border-border/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50" 
+                      <textarea
+                        className="w-full min-h-[120px] p-4 bg-muted/20 border border-border/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
                         placeholder="分享您的想法..."
                       />
                       <div className="flex justify-between items-center">
@@ -335,95 +223,17 @@ export default function PostPage() {
             </Card>
 
             {/* 文章目录 */}
-            <Card className="bg-card/60 backdrop-blur-xl border border-border/50">
+            <Card className="bg-card/60 backdrop-blur-xl border border-border/50 sticky top-24">
               <CardHeader>
                 <CardTitle className="font-serif">本文目录</CardTitle>
               </CardHeader>
               <CardContent>
-                <ul className="space-y-2 text-sm">
-                  <li>
-                    <a href="#" className="flex items-center py-2 text-muted-foreground hover:text-primary transition-colors">
-                      <span className="w-6 text-center mr-2">1</span>
-                      <span>被量化的情感体验</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="flex items-center py-2 text-muted-foreground hover:text-primary transition-colors">
-                      <span className="w-6 text-center mr-2">2</span>
-                      <span>重建深度思考的能力</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="flex items-center py-2 text-muted-foreground hover:text-primary transition-colors">
-                      <span className="w-6 text-center mr-2">3</span>
-                      <span>技术的人文转向</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="flex items-center py-2 text-muted-foreground hover:text-primary transition-colors">
-                      <span className="w-6 text-center mr-2">4</span>
-                      <span>结语：在比特与灵魂之间</span>
-                    </a>
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            {/* 相关文章 */}
-            <Card className="bg-card/60 backdrop-blur-xl border border-border/50">
-              <CardHeader>
-                <CardTitle className="font-serif">相关阅读</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-5">
-                {[
-                  {
-                    title: '注意力经济下的自我保全',
-                    date: '8月22日',
-                    views: 89,
-                    img: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=100&h=100&fit=crop',
-                  },
-                  {
-                    title: '数字极简主义实践指南',
-                    date: '7月28日',
-                    views: 142,
-                    img: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=100&h=100&fit=crop',
-                  },
-                  {
-                    title: '在算法时代保持独立思考',
-                    date: '7月15日',
-                    views: 76,
-                    img: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=100&h=100&fit=crop',
-                  },
-                ].map((post) => (
-                  <a
-                    key={post.title}
-                    href="#"
-                    className="group flex items-center gap-4"
-                  >
-                    <div className="flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden">
-                      <img
-                        src={post.img}
-                        alt={post.title}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div>
-                      <h4 className="font-medium text-card-foreground group-hover:text-primary transition-colors leading-snug">
-                        {post.title}
-                      </h4>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        {post.date} • {post.views}次阅读
-                      </p>
-                    </div>
-                  </a>
-                ))}
+                <MdCatalog editorId="post-content" scrollElement={"html"} />
               </CardContent>
             </Card>
           </aside>
         </div>
       </main>
-
-
     </div>
   );
 }

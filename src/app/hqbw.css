@@ -1,6 +1,11 @@
-/* HQBW主题 - 中国传统风格文本排版样式 */
+/**
+ * HQBW 主题 - 优化完善版
+ * @version 2.0
+ * @description 基于用户提供的 globals.css 变量，优化并补全了文本排版样式。
+ * 新增了引用(blockquote)、定义列表(dl)、手风琴(details/summary)等样式。
+ * 对列表、代码、标题等元素进行了微调，使其更具中式美感和阅读体验。
+ */
 
-/* 基础文本样式 */
 .hqbw-theme {
   font-family: var(--font-sans);
   line-height: 1.75;
@@ -11,7 +16,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* 标题系列 */
+/* --- 标题系列 (优化) --- */
 .hqbw-theme h1 {
   font-size: 2.5rem;
   font-weight: 700;
@@ -22,7 +27,7 @@
   margin-bottom: 2rem;
   font-family: var(--font-serif);
   text-shadow: 0 1px 2px oklch(0 0 0 / 0.08);
-  border-bottom: 3px solid var(--primary);
+  border-bottom: 2px solid var(--primary);
   padding-bottom: 0.75rem;
 }
 
@@ -36,16 +41,20 @@
   margin-bottom: 1.5rem;
   font-family: var(--font-serif);
   position: relative;
+  padding-left: 1rem; /* 为伪元素留出空间 */
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.5rem;
 }
 
 .hqbw-theme h2::before {
   content: '';
   position: absolute;
-  left: -1rem;
-  top: 0.5rem;
+  left: 0; /* 对齐左侧 */
+  top: 50%;
+  transform: translateY(-50%);
   width: 4px;
-  height: 1.5rem;
-  background: linear-gradient(to bottom, var(--primary), var(--accent-foreground));
+  height: 60%; /* 高度与文字更匹配 */
+  background: var(--primary);
   border-radius: 2px;
 }
 
@@ -94,7 +103,7 @@
   text-transform: uppercase;
 }
 
-/* 段落和文本 */
+/* --- 段落和文本 --- */
 .hqbw-theme p {
   margin-bottom: 1.5rem;
   line-height: 1.8;
@@ -125,7 +134,37 @@
   line-height: 1.7;
 }
 
-/* 强调和标记 */
+/* --- 引用 (新增) --- */
+.hqbw-theme blockquote {
+  margin: 2rem 0;
+  padding: 1rem 1.5rem;
+  border-left: 4px solid var(--primary);
+  background-color: var(--muted);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  color: var(--muted-foreground);
+  font-family: var(--font-serif);
+}
+
+.hqbw-theme blockquote p {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.hqbw-theme blockquote footer {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  text-align: right;
+  color: var(--foreground);
+  font-style: italic;
+}
+
+.hqbw-theme blockquote footer::before {
+  content: '— ';
+}
+
+
+/* --- 强调和标记 --- */
 .hqbw-theme strong,
 .hqbw-theme b {
   font-weight: 600;
@@ -136,6 +175,7 @@
 .hqbw-theme i {
   font-style: italic;
   color: var(--primary);
+  font-family: var(--font-serif); /* 斜体使用衬线字体更有韵味 */
 }
 
 .hqbw-theme mark {
@@ -149,7 +189,8 @@
   text-decoration: underline;
   text-decoration-color: var(--primary);
   text-decoration-thickness: 2px;
-  text-underline-offset: 2px;
+  text-underline-offset: 4px; /* 增加下划线与文字的距离 */
+  text-decoration-style: wavy; /* 波浪线更有趣 */
 }
 
 .hqbw-theme s {
@@ -157,7 +198,7 @@
   text-decoration-color: var(--destructive);
 }
 
-/* 链接 */
+/* --- 链接 --- */
 .hqbw-theme a {
   color: var(--primary);
   text-decoration: none;
@@ -178,7 +219,7 @@
   border-radius: var(--radius-sm);
 }
 
-/* 列表 */
+/* --- 列表 (优化) --- */
 .hqbw-theme ul,
 .hqbw-theme ol {
   margin-bottom: 1.5rem;
@@ -189,13 +230,19 @@
   list-style: none;
 }
 
+/* 使用更有中式韵味的“◇”作为列表符号 */
 .hqbw-theme ul li::before {
-  content: '•';
+  content: '◇';
   color: var(--primary);
-  font-weight: bold;
   position: absolute;
   margin-left: -1.5rem;
-  font-size: 1.2em;
+  font-size: 1em;
+  font-weight: normal;
+  transition: transform 0.2s ease;
+}
+
+.hqbw-theme ul li:hover::before {
+  transform: rotate(135deg);
 }
 
 .hqbw-theme ol {
@@ -210,6 +257,7 @@
   margin-bottom: 0.5rem;
   line-height: 1.7;
   position: relative;
+  padding-left: 0.5rem; /* 为符号留出更多空间，避免拥挤 */
 }
 
 .hqbw-theme li:last-child {
@@ -225,53 +273,56 @@
   margin-bottom: 0;
 }
 
-/* 引用 */
-.hqbw-theme blockquote {
-  border-left: 4px solid var(--primary);
-  padding-left: 1.5rem;
+.hqbw-theme ul ul li::before {
+  content: '·'; /* 嵌套列表使用更简单的符号 */
+}
+
+/* --- 定义列表 (新增) --- */
+.hqbw-theme dl {
   margin: 2rem 0;
-  font-style: italic;
-  color: var(--muted-foreground);
-  background-color: var(--muted);
   padding: 1.5rem;
+  background-color: var(--card);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
-  position: relative;
 }
 
-.hqbw-theme blockquote::before {
-  content: '"';
-  font-size: 3rem;
+.hqbw-theme dt {
+  font-weight: 600;
   color: var(--primary);
-  position: absolute;
-  top: -0.5rem;
-  left: 1rem;
   font-family: var(--font-serif);
-  opacity: 0.3;
+  font-size: 1.1rem;
 }
 
-.hqbw-theme blockquote p:last-child {
-  margin-bottom: 0;
+.hqbw-theme dt::before {
+  content: '【';
+  margin-right: 0.25rem;
+}
+.hqbw-theme dt::after {
+  content: '】';
+  margin-left: 0.25rem;
 }
 
-.hqbw-theme blockquote footer {
-  margin-top: 1rem;
-  font-size: 0.875rem;
+.hqbw-theme dd {
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--border);
   color: var(--muted-foreground);
-  font-style: normal;
 }
 
-.hqbw-theme blockquote footer::before {
-  content: '——';
-  margin-right: 0.5rem;
+.hqbw-theme dd:last-of-type {
+    margin-bottom: 0;
 }
 
-/* 代码 */
+
+/* --- 代码 --- */
 .hqbw-theme code {
   font-family: var(--font-mono);
   font-size: 0.875rem;
   background-color: var(--muted);
   color: var(--foreground);
-  padding: 0.25rem 0.375rem;
+  /* padding: 0.25rem 0.375rem; */
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
 }
@@ -279,10 +330,8 @@
 .hqbw-theme pre {
   background-color: var(--card);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
   margin: 1.5rem 0;
   overflow-x: auto;
-  box-shadow: var(--shadow);
 }
 
 .hqbw-theme pre code {
@@ -302,18 +351,19 @@
   padding: 0.25rem 0.5rem;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
+  border-bottom-width: 2px; /* 增加立体感 */
   box-shadow: var(--shadow-sm);
 }
 
-/* 分隔线 */
+/* --- 分隔线 --- */
 .hqbw-theme hr {
   border: none;
-  height: 1px;
+  height: 2px; /* 加粗一点 */
   background: linear-gradient(to right, transparent, var(--border), transparent);
   margin: 3rem 0;
 }
 
-/* 表格 */
+/* --- 表格 --- */
 .hqbw-theme table {
   width: 100%;
   border-collapse: collapse;
@@ -322,6 +372,7 @@
   border-radius: var(--radius);
   overflow: hidden;
   box-shadow: var(--shadow);
+  border: 1px solid var(--border); /* 为表格增加外边框 */
 }
 
 .hqbw-theme th,
@@ -338,6 +389,7 @@
   font-size: 0.875rem;
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
+  font-family: var(--font-sans);
 }
 
 .hqbw-theme tbody tr:hover {
@@ -348,13 +400,14 @@
   border-bottom: none;
 }
 
-/* 图片和媒体 */
+/* --- 图片和媒体 --- */
 .hqbw-theme img {
   max-width: 100%;
   height: auto;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   margin: 1.5rem 0;
+  border: 1px solid var(--border); /* 为图片添加边框 */
 }
 
 .hqbw-theme figure {
@@ -369,7 +422,34 @@
   font-style: italic;
 }
 
-/* 特殊文本样式 */
+/* --- 手风琴/折叠面板 (新增) --- */
+.hqbw-theme details {
+    margin: 1.5rem 0;
+    padding: 1.25rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+}
+
+.hqbw-theme summary {
+    font-weight: 600;
+    color: var(--primary);
+    cursor: pointer;
+    transition: color 0.2s ease;
+    list-style-position: inside; /* 让箭头在内部 */
+}
+
+.hqbw-theme summary:hover {
+    color: var(--accent-foreground);
+}
+
+.hqbw-theme details[open] > summary {
+    margin-bottom: 1rem;
+}
+
+
+/* --- 特殊文本样式 --- */
 .hqbw-theme .highlight {
   background: linear-gradient(120deg, var(--accent) 0%, var(--accent) 100%);
   background-repeat: no-repeat;
@@ -386,7 +466,7 @@
   font-weight: 600;
 }
 
-/* 响应式调整 */
+/* --- 响应式调整 (优化) --- */
 @media (max-width: 768px) {
   .hqbw-theme h1 {
     font-size: 2rem;
@@ -397,6 +477,7 @@
     font-size: 1.75rem;
     margin-top: 2rem;
     margin-bottom: 1rem;
+    padding-left: 0.75rem;
   }
   
   .hqbw-theme h3 {
@@ -404,8 +485,7 @@
   }
   
   .hqbw-theme blockquote {
-    padding-left: 1rem;
-    padding: 1rem;
+    padding: 0.75rem 1rem;
   }
   
   .hqbw-theme pre {
