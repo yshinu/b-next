@@ -1,0 +1,424 @@
+/* HQBW主题 - 中国传统风格文本排版样式 */
+
+/* 基础文本样式 */
+.hqbw-theme {
+  font-family: var(--font-sans);
+  line-height: 1.75;
+  letter-spacing: var(--tracking-normal);
+  color: var(--foreground);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 标题系列 */
+.hqbw-theme h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: var(--tracking-tight);
+  color: var(--primary);
+  margin-top: 0;
+  margin-bottom: 2rem;
+  font-family: var(--font-serif);
+  text-shadow: 0 1px 2px oklch(0 0 0 / 0.08);
+  border-bottom: 3px solid var(--primary);
+  padding-bottom: 0.75rem;
+}
+
+.hqbw-theme h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: var(--tracking-tight);
+  color: var(--primary);
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-serif);
+  position: relative;
+}
+
+.hqbw-theme h2::before {
+  content: '';
+  position: absolute;
+  left: -1rem;
+  top: 0.5rem;
+  width: 4px;
+  height: 1.5rem;
+  background: linear-gradient(to bottom, var(--primary), var(--accent-foreground));
+  border-radius: 2px;
+}
+
+.hqbw-theme h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: var(--tracking-normal);
+  color: var(--foreground);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  font-family: var(--font-serif);
+}
+
+.hqbw-theme h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: var(--tracking-normal);
+  color: var(--foreground);
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  font-family: var(--font-sans);
+}
+
+.hqbw-theme h5 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: var(--tracking-normal);
+  color: var(--muted-foreground);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-sans);
+}
+
+.hqbw-theme h6 {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: var(--tracking-wide);
+  color: var(--muted-foreground);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+}
+
+/* 段落和文本 */
+.hqbw-theme p {
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+  text-align: justify;
+  text-justify: inter-ideograph;
+}
+
+.hqbw-theme p:last-child {
+  margin-bottom: 0;
+}
+
+.hqbw-theme .lead {
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--muted-foreground);
+  margin-bottom: 2rem;
+}
+
+.hqbw-theme .small {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--muted-foreground);
+}
+
+.hqbw-theme .large {
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+
+/* 强调和标记 */
+.hqbw-theme strong,
+.hqbw-theme b {
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.hqbw-theme em,
+.hqbw-theme i {
+  font-style: italic;
+  color: var(--primary);
+}
+
+.hqbw-theme mark {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+  padding: 0.125rem 0.25rem;
+  border-radius: var(--radius-sm);
+}
+
+.hqbw-theme u {
+  text-decoration: underline;
+  text-decoration-color: var(--primary);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+}
+
+.hqbw-theme s {
+  text-decoration: line-through;
+  text-decoration-color: var(--destructive);
+}
+
+/* 链接 */
+.hqbw-theme a {
+  color: var(--primary);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.hqbw-theme a:hover {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+  text-shadow: 0 1px 2px oklch(0 0 0 / 0.1);
+}
+
+.hqbw-theme a:focus {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* 列表 */
+.hqbw-theme ul,
+.hqbw-theme ol {
+  margin-bottom: 1.5rem;
+  padding-left: 2rem;
+}
+
+.hqbw-theme ul {
+  list-style: none;
+}
+
+.hqbw-theme ul li::before {
+  content: '•';
+  color: var(--primary);
+  font-weight: bold;
+  position: absolute;
+  margin-left: -1.5rem;
+  font-size: 1.2em;
+}
+
+.hqbw-theme ol {
+  list-style: decimal;
+}
+
+.hqbw-theme ol li {
+  padding-left: 0.5rem;
+}
+
+.hqbw-theme li {
+  margin-bottom: 0.5rem;
+  line-height: 1.7;
+  position: relative;
+}
+
+.hqbw-theme li:last-child {
+  margin-bottom: 0;
+}
+
+/* 嵌套列表 */
+.hqbw-theme ul ul,
+.hqbw-theme ol ol,
+.hqbw-theme ul ol,
+.hqbw-theme ol ul {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+/* 引用 */
+.hqbw-theme blockquote {
+  border-left: 4px solid var(--primary);
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+  font-style: italic;
+  color: var(--muted-foreground);
+  background-color: var(--muted);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  position: relative;
+}
+
+.hqbw-theme blockquote::before {
+  content: '"';
+  font-size: 3rem;
+  color: var(--primary);
+  position: absolute;
+  top: -0.5rem;
+  left: 1rem;
+  font-family: var(--font-serif);
+  opacity: 0.3;
+}
+
+.hqbw-theme blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.hqbw-theme blockquote footer {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  font-style: normal;
+}
+
+.hqbw-theme blockquote footer::before {
+  content: '——';
+  margin-right: 0.5rem;
+}
+
+/* 代码 */
+.hqbw-theme code {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  background-color: var(--muted);
+  color: var(--foreground);
+  padding: 0.25rem 0.375rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+
+.hqbw-theme pre {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  box-shadow: var(--shadow);
+}
+
+.hqbw-theme pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+/* 键盘按键 */
+.hqbw-theme kbd {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  background-color: var(--secondary);
+  color: var(--secondary-foreground);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+/* 分隔线 */
+.hqbw-theme hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border), transparent);
+  margin: 3rem 0;
+}
+
+/* 表格 */
+.hqbw-theme table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  background-color: var(--card);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.hqbw-theme th,
+.hqbw-theme td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.hqbw-theme th {
+  background-color: var(--muted);
+  font-weight: 600;
+  color: var(--foreground);
+  font-size: 0.875rem;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+.hqbw-theme tbody tr:hover {
+  background-color: var(--accent);
+}
+
+.hqbw-theme tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* 图片和媒体 */
+.hqbw-theme img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin: 1.5rem 0;
+}
+
+.hqbw-theme figure {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.hqbw-theme figcaption {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  font-style: italic;
+}
+
+/* 特殊文本样式 */
+.hqbw-theme .highlight {
+  background: linear-gradient(120deg, var(--accent) 0%, var(--accent) 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 40%;
+  background-position: 0 85%;
+  padding: 0.125rem 0;
+}
+
+.hqbw-theme .gradient-text {
+  background: linear-gradient(135deg, var(--primary), var(--accent-foreground));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 600;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .hqbw-theme h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .hqbw-theme h2 {
+    font-size: 1.75rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hqbw-theme h3 {
+    font-size: 1.375rem;
+  }
+  
+  .hqbw-theme blockquote {
+    padding-left: 1rem;
+    padding: 1rem;
+  }
+  
+  .hqbw-theme pre {
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+  
+  .hqbw-theme table {
+    font-size: 0.875rem;
+  }
+  
+  .hqbw-theme th,
+  .hqbw-theme td {
+    padding: 0.5rem 0.75rem;
+  }
+}
