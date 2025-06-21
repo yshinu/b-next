@@ -33,6 +33,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import Link from "next/link"
+import { LayoutGrid } from "lucide-react"
 
 const data = {
   user: {
@@ -47,9 +48,9 @@ const data = {
       icon: IconDashboard,
     },
     {
-      title: "Lifecycle",
-      url: "#",
-      icon: IconListDetails,
+      title: "文章分类",
+      url: "/admin/categories",
+      icon: LayoutGrid,
     },
     {
       title: "Analytics",

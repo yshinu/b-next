@@ -108,7 +108,7 @@ model Category {
 
   // 关系：一个分类可以有多篇文章
   posts       Post[]
-
+ order       Int     @default(0) 
   @@map("categories")
 }
 // 新增：网站及站长配置信息模型 (设计为只有一行数据)
