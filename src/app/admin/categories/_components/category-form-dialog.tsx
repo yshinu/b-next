@@ -25,6 +25,7 @@ import { Textarea } from "@/components/ui/textarea"; // 建议为 description �
 import { useActionState, useEffect } from "react";
 import { CategoryFormData, categorySchema } from "../schema";
 import { createCategoryAction, updateCategoryAction } from "../action";
+import { useRouter } from "next/navigation";
 
 // 定义组件的 Props
 interface CategoryFormDialogProps {
@@ -42,7 +43,7 @@ export function CategoryFormDialog({
   onSuccess,
 }: CategoryFormDialogProps) {
   const isEditMode = !!category;
-
+  const router = useRouter()
   const form = useForm<CategoryFormData>({
     resolver: zodResolver(categorySchema),
     defaultValues: {
@@ -85,6 +86,7 @@ export function CategoryFormDialog({
   useEffect(() => {
     if (formState.success) {
       onOpenChange(false);
+      router.refresh()
     }
   }, [formState, onOpenChange]);
 

@@ -43,10 +43,8 @@ export async function createCategoryAction(
     await prisma.category.create({
       data: validatedFields.data,
     });
-
     // 4. 清除 'categories' 数据的缓存
-    revalidateTag("categories");
-
+    
     return { success: true, message: "分类创建成功！" };
   } catch (error) {
     // 处理唯一性约束等数据库错误
@@ -90,10 +88,8 @@ export async function updateCategoryAction(
       where: { id },
       data: validatedFields.data,
     });
-
     // 3. 清除缓存
-    revalidateTag("categories");
-
+    
     return { success: true, message: "分类更新成功！" };
   } catch (error) {
     return {
@@ -114,9 +110,7 @@ export async function deleteCategoryAction(id: string): Promise<FormState> {
     await prisma.category.delete({
       where: { id },
     });
-
-    revalidateTag("categories");
-
+    
     return { success: true, message: "分类删除成功！" };
   } catch (error) {
     return { success: false, message: "删除失败，请稍后重试。" };
@@ -138,56 +132,3 @@ export async function getCategoryById(id: string) {
   }
 }
 
-/**
- * [查询] 获取分页后的分类列表
- * @param nameFilter - 按名称筛选的字符串
- * @param page - 当前页码
- */
-export async function fetchPaginatedCategories(
-  nameFilter?: string,
-  page: number = 1,
-  pageSize:number=5
-) {
-  try {
-    const whereClause = nameFilter
-      ? { name: { contains: nameFilter, mode: "insensitive" as const } }
-      : {};
-
-    // 1. 同时执行两个数据库查询：获取总数和获取当页数据
-    const [totalCount, categoriesWithCount] = await prisma.$transaction([
-      prisma.category.count({ where: whereClause }),
-      prisma.category.findMany({
-        where: whereClause,
-        orderBy: {
-          order: "asc",
-        },
-        take: pageSize,
-        skip: (page - 1) * pageSize,
-        include: {
-          _count: {
-            select: { posts: true }, 
-          },
-        },
-      }),
-    ]);
-    
- 
-    const categories = categoriesWithCount.map((category) => {
-        const addPostCount = {
-        ...category,
-        postCount: category._count.posts,
-      };
-      
-      return fullCategorySchema.parse(addPostCount);
-    });
-
-
-
-    const totalPages = Math.ceil(totalCount / pageSize);
-
-    return { categories, totalPages };
-  } catch (error) {
-    console.error("Database Error:", error);
-    return { categories: [], totalPages: 0 };
-  }
-}

@@ -1,16 +1,60 @@
+import prisma from "@/lib/prisma";
 import { CategoryList } from "./_components/category-list";
-import { fetchPaginatedCategories } from "./action";
-import { Category } from "./schema";
+import { fullCategorySchema } from "./schema";
 export default async function CategoryManagementPage({
   searchParams,
 }: {
   searchParams: Promise<{ name?: string; page?: string }>;
 }) {
-const searchParamsThen = await searchParams;
+  const searchParamsThen = await searchParams;
   // 1. 从 URL 查询参数中获取筛选条件和页码
   const nameFilter = searchParamsThen.name;
   const currentPage = Number(searchParamsThen.page) || 1; // 将 page 转为数字，默认为 1
+  async function fetchPaginatedCategories(
+    nameFilter?: string,
+    page: number = 1,
+    pageSize: number = 5
+  ) {
+    try {
+      const whereClause = nameFilter
+        ? { name: { contains: nameFilter, mode: "insensitive" as const } }
+        : {};
 
+      // 1. 同时执行两个数据库查询：获取总数和获取当页数据
+      const [totalCount, categoriesWithCount] = await prisma.$transaction([
+        prisma.category.count({ where: whereClause }),
+        prisma.category.findMany({
+          where: whereClause,
+          orderBy: {
+            order: "asc",
+          },
+          take: pageSize,
+          skip: (page - 1) * pageSize,
+          include: {
+            _count: {
+              select: { posts: true },
+            },
+          },
+        }),
+      ]);
+
+      const categories = categoriesWithCount.map((category) => {
+        const addPostCount = {
+          ...category,
+          postCount: category._count.posts,
+        };
+
+        return fullCategorySchema.parse(addPostCount);
+      });
+
+      const totalPages = Math.ceil(totalCount / pageSize);
+
+      return { categories, totalPages };
+    } catch (error) {
+      console.error("Database Error:", error);
+      return { categories: [], totalPages: 0 };
+    }
+  }
   const { categories, totalPages } = await fetchPaginatedCategories(
     nameFilter,
     currentPage,
